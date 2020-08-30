@@ -82,7 +82,6 @@ function ogenzo_init()
             } else {
                 add_action('woocommerce_update_options_payment_gateways', array($this, 'process_admin_options'));
             }
-
         }
 
 
@@ -188,7 +187,14 @@ function ogenzo_init()
 <?php
             }
         }
+        public  function sanitizeNumber($number)
+        {
 
+            $tel = str_replace("-", "", $number);
+            $tel = str_replace(array(' ', '<', '>', '&', '{', '}', '*', "+", '!', '@', '#', "$", '%', '^', '&'), "", $tel);
+            $tel = substr($tel, -9);
+            return "0{$tel}";
+        }
 
         function process_payment($order_id)
         {
@@ -201,7 +207,7 @@ function ogenzo_init()
             $order->update_status('pending-payment');
 
             $data = array();
-            $data['phone'] = $order->get_billing_phone();
+            $data['phone'] = $this->sanitizeNumber($order->get_billing_phone());
             $data['amount'] = $order->get_total();
             $data['txn_id'] = $trx_id;
             $data['msg'] = 'Order No ' . $order_id;
