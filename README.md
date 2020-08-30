@@ -18,7 +18,10 @@ This is the official Ogenzo Payments WooCommerce plugin that connects your WooCo
 Download the plugin from wordpress plugin store and install it.
 Activate the plugin
 Go to WooCommerce settings, payments and fill in the required information as defined when setting up the Ogenzo Payments Account.
+
+Copy the Cron Url and set it up as a cron job done atleast every minute.
 Save these settings and enjoy plugin.
+
 
 
 == Support ==
